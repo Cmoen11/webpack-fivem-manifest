@@ -3,7 +3,8 @@ const path = require('path');
 
 const defaultOptions = {
   itemsFromCompilation: compilation => Object.keys(compilation.assets),
-  output: '../__resource.lua',
+  preContent: "",
+  output: '../__resource2.lua',
 };
 
 function ResourceManifestPlugin(options) {
@@ -17,6 +18,7 @@ ResourceManifestPlugin.prototype.apply = function(compiler) {
   compiler.hooks.emit.tap(pluginName, compilation => {
     const assets = itemsFromCompilation(compilation);
     const result = format(
+      preContent,
       assets,
       compilation.options.output.path.split('\\').pop(),
     );
@@ -27,8 +29,10 @@ ResourceManifestPlugin.prototype.apply = function(compiler) {
   });
 };
 
-function format(assets, path) {
+function format(preContent, assets, path) {
   return `
+  ${preContent}
+  --------------------
 ui_page "${path}/index.html"
 
 files{${assets.map(asset => `"${path}/${asset}"`).join(',')}}
