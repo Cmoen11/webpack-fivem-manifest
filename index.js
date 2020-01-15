@@ -8,7 +8,7 @@ const defaultOptions = {
 };
 
 function ResourceManifestPlugin(options) {
-  defaults(this, options, defaultOptions);
+  defaults(this, {...defaultOptions, options}, defaultOptions);
 }
 
 const pluginName = 'fivem-manifest-plugin';
