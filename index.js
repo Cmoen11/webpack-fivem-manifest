@@ -1,5 +1,5 @@
 const { defaults, isNil } = require('lodash');
-const path = require('path');
+var fs = require("fs");
 
 const defaultOptions = {
   itemsFromCompilation: compilation => Object.keys(compilation.assets),
