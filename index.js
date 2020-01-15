@@ -3,11 +3,12 @@ const path = require('path');
 
 const defaultOptions = {
   itemsFromCompilation: compilation => Object.keys(compilation.assets),
-  preContent: "defualt",
+  preContent: "",
   output: '../__resource2.lua',
 };
 
 function ResourceManifestPlugin(options) {
+  console.log(options);
   defaults(this, {...defaultOptions, ...options}, defaultOptions);
 }
 
