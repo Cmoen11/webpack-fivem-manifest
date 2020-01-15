@@ -41,8 +41,7 @@ ResourceManifestPlugin.prototype.apply = function(compiler) {
 };
 
 function format(preContent, assets, path) {
-  return `
-${preContent}
+  return `${preContent}
 ui_page "${path}/index.html"
 
 files{${assets.map(asset => `"${path}/${asset}"`).join(',')}}
