@@ -4,7 +4,7 @@ var fs = require("fs");
 const defaultOptions = {
   itemsFromCompilation: compilation => Object.keys(compilation.assets),
   filePath: undefined,
-  output: '../__resource2.lua',
+  output: '../__resource.lua',
 };
 
 function ResourceManifestPlugin(options) {
@@ -21,7 +21,7 @@ ResourceManifestPlugin.prototype.apply = function(compiler) {
   if (!isNil(filePath)) {
     fs.readFile(filePath, "utf8", function (err, data) {
       if (err) throw err;
-      preContent = data;
+      preContent = data.match(/[^;]*/);
     });
   }
 
@@ -42,8 +42,7 @@ ResourceManifestPlugin.prototype.apply = function(compiler) {
 
 function format(preContent, assets, path) {
   return `
-  ${preContent}
-  --------------------
+${preContent}
 ui_page "${path}/index.html"
 
 files{${assets.map(asset => `"${path}/${asset}"`).join(',')}}
