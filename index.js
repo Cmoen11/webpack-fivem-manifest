@@ -3,18 +3,19 @@ const path = require('path');
 
 const defaultOptions = {
   itemsFromCompilation: compilation => Object.keys(compilation.assets),
-  preContent: "",
+  preContent: "defualt",
   output: '../__resource2.lua',
 };
 
 function ResourceManifestPlugin(options) {
-  defaults(this, {...defaultOptions, options}, defaultOptions);
+  defaults(this, {...defaultOptions, ...options}, defaultOptions);
 }
 
 const pluginName = 'fivem-manifest-plugin';
 
 ResourceManifestPlugin.prototype.apply = function(compiler) {
   const { itemsFromCompilation, output, preContent } = this;
+  
   compiler.hooks.emit.tap(pluginName, compilation => {
     const assets = itemsFromCompilation(compilation);
     const result = format(
