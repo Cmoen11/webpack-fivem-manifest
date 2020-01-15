@@ -21,7 +21,7 @@ ResourceManifestPlugin.prototype.apply = function(compiler) {
   if (!isNil(filePath)) {
     fs.readFile(filePath, "utf8", function (err, data) {
       if (err) throw err;
-      preContent = data.match(/[^;]*/);
+      preContent = data.match(/[^]*;/);
     });
   }
 
