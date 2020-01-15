@@ -14,7 +14,7 @@ function ResourceManifestPlugin(options) {
 const pluginName = 'fivem-manifest-plugin';
 
 ResourceManifestPlugin.prototype.apply = function(compiler) {
-  const { itemsFromCompilation, output } = this;
+  const { itemsFromCompilation, output, preContent } = this;
   compiler.hooks.emit.tap(pluginName, compilation => {
     const assets = itemsFromCompilation(compilation);
     const result = format(
